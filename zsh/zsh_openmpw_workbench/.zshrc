@@ -3,7 +3,8 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
+export DEFAULT_USER="andylithia"
+echo "ZSH Context: $USER@$HOST"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -129,11 +130,11 @@ export PATH="$PATH:/home/andylithia/ngspice/bin"
 #export PDK_ROOT="/home/andylithia/openmpw/pdk"
 # export WDR="/home/andylithia/openmpw/project_kyouko"
 export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
-export PDKPATH="$PDK_ROOT/sky130A"
+export PDKPATH="$PDK_ROOT/sky130B"
 export OPENLANE_ROOT="/home/andylithia/openmpw/OpenLane"
-export WDR="/home/andylithia/openmpw/MPWTRIAL"
-export UPRJ_ROOT="/home/andylithia/openmpw/MPWTRIAL"
-export INPUT_DIRECTORY="/home/andylithia/openmpw/MPWTRIAL"
+export WDR="/home/andylithia/openmpw/Project-Reisen-Chip1"
+export UPRJ_ROOT="$WDR"
+export INPUT_DIRECTORY="$WDR"
 export CARAVEL_ROOT="$WDR/caravel"
 export MCW_ROOT="$WDR/caravel/mgmt_core_wrapper"
 export GCC_PATH="/home/andylithia/openmpw/RV32I_GCC/bin"
@@ -145,4 +146,30 @@ export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
 # XC8 Compiler
 export PATH="/opt/microchip/xc8/v2.36/pic-as/bin:opt/microchip/xc8/v2.36/bin:$PATH"
+
+# Pyenv
+# 
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/andylithia/gdsfactory/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/andylithia/gdsfactory/etc/profile.d/conda.sh" ]; then
+        . "/home/andylithia/gdsfactory/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/andylithia/gdsfactory/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/andylithia/gdsfactory/etc/profile.d/mamba.sh" ]; then
+    . "/home/andylithia/gdsfactory/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
 

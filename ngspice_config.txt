@@ -1,0 +1,5 @@
+221027
+../configure --with-x --enable-xspice --disable-debug --enable-cider --enable-adms --enable-pss --with-fftw3=yes --with-readline=yes --enable-openmp 
+
+--enable-oldapps is causing link time problems
+Something is wrong about the character set mappings, the plot display is screwed up 
