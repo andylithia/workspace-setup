@@ -15,4 +15,7 @@ rm .vimrc
 ln -s ~/github/workspace-setup/zsh/zsh_openmpw_workbench/.zshrc
 ln -s ~/github/workspace-setup/vim/X61_221019/.vimrc
 
-
+# Setting up GIT
+git config --global credential.helper store
+git config --global user.email "thelithcore@gmail.com"
+git config --global user.name "andylithia"
