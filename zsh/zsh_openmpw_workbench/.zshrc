@@ -100,3 +100,8 @@ export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 # XC8 Compiler
 export PATH="/opt/microchip/xc8/v2.36/pic-as/bin:opt/microchip/xc8/v2.36/bin:$PATH"
 
+# AWS S3
+export AWS_ACCESS_KEY_ID="AKIAXDMEXUIZUYJ5EMF5"
+export AWS_SECRET_ACCESS_KEY="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"
+
+export QSYS_ROOTDIR="/home/andylithia/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"

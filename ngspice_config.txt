@@ -1,3 +1,7 @@
+221120
+sudo apt-get install adms libadms0 autoconf libtool automake
+sudo apt-get install libxaw7-dev libreadline-dev libfftw3-dev
+
 221027
 ../configure --with-x --enable-xspice --disable-debug --enable-cider --enable-adms --enable-pss --with-fftw3=yes --with-readline=yes --enable-openmp 
 
