@@ -1,6 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
 export DEFAULT_USER="andylithia"
-echo "\e[0m\e[30m\e[40m\e[1;34m ZSH Context: $USER@$HOST \e[0m\e[30m\e[0m"
 ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -49,6 +48,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+echo "\e[0m\e[30m\e[40m\e[1;34m ZSH Context: $USER@$HOST \e[0m\e[30m\e[0m"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -69,39 +69,79 @@ function acp() {
   git push
 }
 
+# -- Pico
 export PICO_SDK_PATH="/home/andylithia/pico/pico-sdk"
-# xschem
-export PATH="$PATH:/home/andylithia/xschem/bin"
-export USER_CONF_DIR="/home/andylithia/.xschem"
-# magic
-export CAD_ROOT="/usr/local/lib"
 
+# -- git Credentials
 export GCM_CREDENTIAL_STORE="gpg"
 export PATH="$PATH:/home/andylithia/ngspice/bin"
 
-# CURRENT PROJECT: 41CA
-#export PDK_ROOT="/home/andylithia/openmpw/pdk"
-# export WDR="/home/andylithia/openmpw/project_kyouko"
-export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
-export PDKPATH="$PDK_ROOT/sky130B"
-export OPENLANE_ROOT="/home/andylithia/openmpw/OpenLane"
-export WDR="/home/andylithia/openmpw/Project-Reisen-Chip1"
-export UPRJ_ROOT="$WDR"
-export INPUT_DIRECTORY="$WDR"
-export CARAVEL_ROOT="$WDR/caravel"
-export MCW_ROOT="$WDR/caravel/mgmt_core_wrapper"
-export GCC_PATH="/home/andylithia/openmpw/RV32I_GCC/bin"
-export PATH="$GCC_PATH:/home/andylithia/.local/bin:$PATH"
-# golang-1.16
-export GOROOT="/usr/local/go"
-export GOPATH="/home/andylithia/go"
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH" 
+# -- OpenMPW Project Selector
+# 
+mpw_registertools()
+{
+	# -- xschem
+	# export PATH="$PATH:/home/andylithia/xschem/bin"
+	export USER_CONF_DIR="/home/andylithia/.xschem"
+	# -- magic
+	export CAD_ROOT="/usr/local/lib"
 
-# XC8 Compiler
-export PATH="/opt/microchip/xc8/v2.36/pic-as/bin:opt/microchip/xc8/v2.36/bin:$PATH"
+	# -- Caravel
+	# export PDKPATH="$PDK_ROOT/sky130B"
+	export OPENLANE_ROOT="/home/andylithia/openmpw/OpenLane"
+	export UPRJ_ROOT="$WDR"
+	export INPUT_DIRECTORY="$WDR"
+	export CARAVEL_ROOT="$WDR/caravel"
+	export MCW_ROOT="$WDR/caravel/mgmt_core_wrapper"
+}
 
-# AWS S3
+echo "Select workspace:"
+echo "Y). Sky130A  - Project-Yatsuhashi"
+echo "R). Sky130A  - Project-Reisen     << Default"
+echo "G). GF180mcu - Project-Futo"
+echo "N). none"
+read answer
+case ${answer:0:1} in
+	[Yy]* )
+		echo "Selecting Project-Yatsuhashi"
+		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
+		export PDKPATH="$PDK_ROOT/sky130A"
+		export WDR="/home/andylithia/openmpw/Project-Yatsuhashi-Chip1"
+		mpw_registertools
+	;;
+	[Gg]* )
+		echo "Selecting Project-Futo"
+		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
+		export PDKPATH="$PDK_ROOT/gf180mcuC"
+		export WDR="/home/andylithia/openmpw/Project-Futo"
+		mpw_registertools
+	;;
+	[Nn]* )
+        echo "None"
+    ;;
+	* )
+        echo "Selecting Project-Reisen"
+		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
+		export PDKPATH="$PDK_ROOT/sky130A"
+		export WDR="/home/andylithia/openmpw/Project-Reisen-Chip1"
+		mpw_registertools
+	;;
+
+esac
+
+# -- Adding RV32I GCC
+# export GCC_PATH="/home/andylithia/openmpw/RV32I_GCC/bin"
+# export PATH="$GCC_PATH:/home/andylithia/.local/bin:$PATH"
+# -- golang-1.16
+# export GOROOT="/usr/local/go"
+# export GOPATH="/home/andylithia/go"
+# export PATH="$GOPATH/bin:$GOROOT/bin:$PATH" 
+# -- XC8 Compiler
+# export PATH="/opt/microchip/xc8/v2.36/pic-as/bin:opt/microchip/xc8/v2.36/bin:$PATH"
+
+# -- AWS S3
 export AWS_ACCESS_KEY_ID="AKIAXDMEXUIZUYJ5EMF5"
 export AWS_SECRET_ACCESS_KEY="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"
 
+# -- Quartus
 export QSYS_ROOTDIR="/home/andylithia/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
