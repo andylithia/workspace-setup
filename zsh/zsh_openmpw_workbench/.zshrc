@@ -88,11 +88,11 @@ mpw_registertools()
 
 	# -- Caravel
 	# export PDKPATH="$PDK_ROOT/sky130B"
-	export OPENLANE_ROOT="/home/andylithia/openmpw/OpenLane"
-	export UPRJ_ROOT="$WDR"
-	export INPUT_DIRECTORY="$WDR"
-	export CARAVEL_ROOT="$WDR/caravel"
-	export MCW_ROOT="$WDR/caravel/mgmt_core_wrapper"
+	# export OPENLANE_ROOT="/home/andylithia/openmpw/OpenLane"
+	# export UPRJ_ROOT="$WDR"
+	# export INPUT_DIRECTORY="$WDR"
+	# export CARAVEL_ROOT="$WDR/caravel"
+	# export MCW_ROOT="$WDR/caravel/mgmt_core_wrapper"
 }
 
 echo "Select workspace:"
@@ -113,7 +113,7 @@ case ${answer:0:1} in
 		echo "Selecting Project-Futo"
 		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
 		export PDKPATH="$PDK_ROOT/gf180mcuC"
-		export WDR="/home/andylithia/openmpw/Project-Futo"
+		export WDR="/home/andylithia/openmpw/Project-Futo-Chip1"
 		mpw_registertools
 	;;
 	[Nn]* )
@@ -139,9 +139,7 @@ esac
 # -- XC8 Compiler
 # export PATH="/opt/microchip/xc8/v2.36/pic-as/bin:opt/microchip/xc8/v2.36/bin:$PATH"
 
-# -- AWS S3
-export AWS_ACCESS_KEY_ID="AKIAXDMEXUIZUYJ5EMF5"
-export AWS_SECRET_ACCESS_KEY="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"
+source ~/.ssh/AWS.key
 
 # -- Quartus
 export QSYS_ROOTDIR="/home/andylithia/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
