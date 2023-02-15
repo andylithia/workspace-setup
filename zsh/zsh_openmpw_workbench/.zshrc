@@ -76,6 +76,9 @@ export PICO_SDK_PATH="/home/andylithia/pico/pico-sdk"
 export GCM_CREDENTIAL_STORE="gpg"
 export PATH="$PATH:/home/andylithia/ngspice/bin"
 
+# -- PIP
+export PATH="$PATH:/home/andylithia/.local/bin"
+
 # -- OpenMPW Project Selector
 # 
 mpw_registertools()
@@ -99,11 +102,13 @@ echo "Select workspace:"
 echo "Y). Sky130A  - Project-Yatsuhashi"
 echo "R). Sky130A  - Project-Reisen     << Default"
 echo "G). GF180mcu - Project-Futo"
+echo "S). GF180mcu - Project-Shizuha"
 echo "N). none"
 read answer
 case ${answer:0:1} in
 	[Yy]* )
 		echo "Selecting Project-Yatsuhashi"
+		export PROJ_NAME="Yatsuhashi"
 		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
 		export PDKPATH="$PDK_ROOT/sky130A"
 		export WDR="/home/andylithia/openmpw/Project-Yatsuhashi-Chip1"
@@ -111,9 +116,20 @@ case ${answer:0:1} in
 	;;
 	[Gg]* )
 		echo "Selecting Project-Futo"
+		export PROJ_NAME="Futo"
 		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
 		export PDKPATH="$PDK_ROOT/gf180mcuC"
 		export WDR="/home/andylithia/openmpw/Project-Futo-Chip1"
+		export KLAYOUT_PATH="$PDK_ROOT/gf180mcuC/libs.tech/klayout"
+		mpw_registertools
+	;;
+	[Ss]* )
+		echo "Selecting Project-Shizuha"
+		export PROJ_NAME="Shizuha"
+		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
+		export PDKPATH="$PDK_ROOT/gf180mcuC"
+		export WDR="/home/andylithia/openmpw/Project-Shizuha"
+		export KLAYOUT_PATH="$PDK_ROOT/gf180mcuC/libs.tech/klayout"
 		mpw_registertools
 	;;
 	[Nn]* )
@@ -121,9 +137,11 @@ case ${answer:0:1} in
     ;;
 	* )
         echo "Selecting Project-Reisen"
+		export PROJ_NAME="Reisen"
 		export PDK_ROOT="/home/andylithia/openmpw/pdk_1"
 		export PDKPATH="$PDK_ROOT/sky130A"
 		export WDR="/home/andylithia/openmpw/Project-Reisen-Chip1"
+		export KLAYOUT_PATH="$PDK_ROOT/sky130A/libs.tech/klayout"
 		mpw_registertools
 	;;
 

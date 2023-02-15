@@ -158,7 +158,7 @@ nnoremap <leader>i :VerilogFollowInstance<CR>
 nnoremap <leader>I :VerilogFollowPort<CR>
 nnoremap <leader>U :VerilogGotoInstanceStart<CR>
 set background=dark
-colorscheme evening
+" colorscheme evening
 " set guifont="Droid Sans Mono Dotted for Powerline 10"    
 " vim: set ts=4 sw=4 noet 
 
