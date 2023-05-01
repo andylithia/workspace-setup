@@ -1,4 +1,3 @@
-sudo apt-get install vim zsh git build-essential curl python-is-python3 python3-pip
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Enter exit in the new zsh prompt
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
