@@ -7,10 +7,10 @@ ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 
 plugins=(
 	git
+	tmux
 	gitignore
 	vscode
 	zsh-autosuggestions
-	zsh-syntax-highlighting
 	k
 )
 
@@ -31,6 +31,24 @@ export GCM_CREDENTIAL_STORE="gpg"
 source ~/.ssh/AWS.key
 # -- PIP
 export PATH="$PATH:/home/$DEFAULT_USER/.local/bin"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/andylithia/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/andylithia/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/andylithia/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/andylithia/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# chatGPT Shell
+export PATH=$PATH:/usr/local/bin
 
 # -- OpenMPW Project Selector
 #
@@ -107,31 +125,78 @@ case ${answer:0:1} in
 esac
 }
 
-# -- Verilator
-export VERILATOR_ROOT="/usr/local"
-# export PATH="$VERILATOR_ROOT/bin:$PATH"
+rv_menu(){
+	rv_register_tools(){
+		conda activate vdv
+		# -- Register Verilator
+		# export VERILATOR_ROOT="/usr/local"
+		export VERILATOR_ROOT="/home/$DEFAULT_USER/rv/sources/verilator"
+		# export PATH="$VERILATOR_ROOT/bin:$PATH"
+	}
+	echo "Select workspace:"
+	echo "S). SRV32"
+	echo "R). SCR1 / SSRV     << Default"
+	echo "D). RSD"
+	echo "O). SoomRV"
+	echo "N). none"
+	read answer
+	case ${answer:0:1} in
+		[Ss]* )
+			echo "Selecting SRV32"
+			export WDR="/home/$DEFAULT_USER/rv/srv32"
+			export PATH="/home/$DEFAULT_USER/rv/rvgcc/srv32/bin:$PATH"
+			rv_register_tools
+		;;
+		[Oo]* )
+			echo "Selecting SoomRV"
+			export WDR="/home/$DEFAULT_USER/rv/SoomRV"
+			export PATH="/home/$DEFAULT_USER/rv/rvgcc/riscv32_linux_multilib/bin:$PATH"
+			rv_register_tools
+		;;
+		[Dd]* )
+			echo "Selecting RSD"
+			export WDR="/home/$DEFAULT_USER/rv/rsd"
+			# export PATH="/home/$DEFAULT_USER/rv/sc-dt/riscv-gcc/bin:$PATH"
+			export RSD_VERILATOR_BIN="/home/$DEFAULT_USER/rv/sources/verilator_v4.228/bin/verilator"
+			export VERILATOR_ROOT="/home/$DEFAULT_USER/rv/sources/verilator_v4.228"
+			export RSD_ROOT="/home/$DEFAULT_USER/rv/rsd"
+			export RSD_GCC_PATH="/home/$DEFAULT_USER/rv/rvgcc/srv32/bin"
+			export RSD_GCC_PREFIX="riscv32-unknown-elf-"
+			# rv_register_tools
+		;;
+		[Nn]* )
+			echo "None"
+		;;
+		* )
+			echo "Selecting SCR1 / SSRV"
+			export WDR="/home/$DEFAULT_USER/rv/scr1"
+			export PATH="/home/$DEFAULT_USER/rv/sc-dt/riscv-gcc/bin:$PATH"
+			rv_register_tools
+		;;
+	esac
 
 
+}
+
+# -- Intellij IDE
+export PATH="/home/andylithia/idea-IC-232.9921.47/bin/:$PATH"
 # -- Pico
 export PICO_SDK_PATH="/home/$DEFAULT_USER/pico/pico-sdk"
 # -- Quartus
-export QSYS_ROOTDIR="/home/$DEFAULT_USER/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
+# export QSYS_ROOTDIR="/home/$DEFAULT_USER/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
+export PATH="/home/andylithia/WPT/palace/build/bin/:$PATH"
 # -- CUDA
-export PATH=/usr/local/cuda-12.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64\
-                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# 
+#export PATH=/usr/local/cuda-12.0/bin${PATH:+:${PATH}}
+#export LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64\
+#                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/andylithia/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/andylithia/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/andylithia/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/andylithia/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/andylithia/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
